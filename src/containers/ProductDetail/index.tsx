@@ -1,3 +1,4 @@
+import { HelpOutlineRounded } from "@material-ui/icons";
 import React from "react";
 import ProductInfo from "../../components/ProductInfo";
 import ProductService from "../../services/ProductService";
@@ -81,9 +82,15 @@ class ProductDetail extends React.Component<{}, ProductState> {
 
         console.log("selectedColor: " + value);
 
-        this.setState({
-            selectedColor: value
-        })
+        const helper = this.state.helper;
+        const sizes = helper.getSizes(value);
+
+        this.setState({selectedColor: value, sizes})
+
+        if(sizes.length >= 1) {
+            const defaultSelectedSize = sizes[0];
+            this.setState({selectedSize: defaultSelectedSize});
+        }
     } 
 
     changedSize = (event: any) => {
