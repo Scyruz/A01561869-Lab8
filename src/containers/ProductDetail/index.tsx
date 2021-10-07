@@ -1,4 +1,3 @@
-import { HelpOutlineRounded } from "@material-ui/icons";
 import React from "react";
 import ProductInfo from "../../components/ProductInfo";
 import ProductService from "../../services/ProductService";
@@ -39,7 +38,8 @@ class ProductDetail extends React.Component<{}, ProductState> {
      */
     render() {
         return (
-            <ProductInfo product={this.state.product} colors={this.state.colors} selectedColor={this.state.selectedColor} changedColor={this.changedColor} sizes={this.state.sizes} selectedSize={this.state.selectedSize} changedSize={this.changedSize}/>
+            <ProductInfo product={this.state.product} colors={this.state.colors} selectedColor={this.state.selectedColor} changedColor={this.changedColor} 
+            sizes={this.state.sizes} selectedSize={this.state.selectedSize} changedSize={this.changedSize} />
         )
     }
 
@@ -59,13 +59,13 @@ class ProductDetail extends React.Component<{}, ProductState> {
                 if (colors.length  >= 1) {
                     const defaultSelectedColor = colors[0];
                     sizes = helper.getSizes(colors[0]);
-
-                    if(sizes.length >= 1) {
+                    
+                    if(sizes.length >= 2){
                         const defaultSelectedSize = sizes[0];
-                        this.setState({selectedSize: defaultSelectedSize});
+                        this.setState({selectedSize:defaultSelectedSize});
                     }
-
-                    this.setState({selectedColor: defaultSelectedColor});
+                    
+                    this.setState({selectedColor:defaultSelectedColor});
                 }
 
                 console.log("Sizes: " + sizes);
@@ -85,11 +85,14 @@ class ProductDetail extends React.Component<{}, ProductState> {
         const helper = this.state.helper;
         const sizes = helper.getSizes(value);
 
-        this.setState({selectedColor: value, sizes})
+        this.setState({
+            selectedColor: value,
+            sizes
+        })
 
-        if(sizes.length >= 1) {
+        if(sizes.length >= 2){
             const defaultSelectedSize = sizes[0];
-            this.setState({selectedSize: defaultSelectedSize});
+            this.setState({selectedSize:defaultSelectedSize});
         }
     } 
 
@@ -98,9 +101,10 @@ class ProductDetail extends React.Component<{}, ProductState> {
         let value = target.value;
 
         console.log("selectedSize: " + value);
-
+        const sku = this.state.helper.getSku(this.state.selectedColor, value);
         this.setState({
-            selectedSize: value
+            selectedSize: value,
+            sku
         })
     } 
 }
