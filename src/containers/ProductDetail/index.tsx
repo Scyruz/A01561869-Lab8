@@ -38,8 +38,8 @@ class ProductDetail extends React.Component<{}, ProductState> {
      */
     render() {
         return (
-            <ProductInfo product={this.state.product} colors={this.state.colors} selectedColor={this.state.selectedColor} changedColor={this.changedColor} 
-            sizes={this.state.sizes} selectedSize={this.state.selectedSize} changedSize={this.changedSize} />
+            <ProductInfo product={this.state.product} colors={this.state.colors} selectedColor={this.state.selectedColor} changedColor={this.changedColor}
+            sizes={this.state.sizes} selectedSize={this.state.selectedSize} changedSize={this.changedSize} handleAddToCart={this.handleAddToCart}/>
         )
     }
 
@@ -107,6 +107,10 @@ class ProductDetail extends React.Component<{}, ProductState> {
             sku
         })
     } 
+
+    handleAddToCart = (event: any) => {
+        console.log(this.state.selectedColor, this.state.selectedSize);
+    }
 }
 
 export default ProductDetail;

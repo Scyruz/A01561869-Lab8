@@ -23,6 +23,7 @@ interface ProductInfoProps {
   changedColor(event: any): void;
   selectedSize: string;
   changedSize(event: any): void;
+  handleAddToCart(event: any): void;
 }
 
 /**
@@ -142,7 +143,7 @@ const ProductInfo : React.FC<ProductInfoProps>  = (props) => {
           <Grid item lg={10} />
 
           <Grid item lg={4}>
-            <Button className="cartButton" variant="contained">
+            <Button className="cartButton" variant="contained" onClick={props.handleAddToCart} >
               Add to Cart
             </Button>
           </Grid>
